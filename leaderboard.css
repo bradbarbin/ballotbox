@@ -16,7 +16,7 @@ body {
     user-select: none;
 }
 
-a{rgb(255, 0, 92);}
+a, a:visited{rgb(255, 0, 92);}
 
 #outer {
     width: 600px;
