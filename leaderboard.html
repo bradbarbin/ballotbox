@@ -1,0 +1,72 @@
+<head>
+  <title>King of The Week</title>
+
+</head>
+
+<body>
+ {{> rules}}  
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <h5>Smashing Ballot Boxes</h5>
+        
+          {{> menuButton}}
+        </div>
+
+      </div>
+    </div>
+  <div id="outer">
+  
+   {{> leaderboard}}
+  </div>
+
+</body>
+<template name="menuButton">
+  <button id="theRules" type="button" class="btn btn-navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+  </button>
+</template>
+
+<template name="leaderboard">
+  <div class="leaderboard">
+    {{#each players}}
+      {{> player}}
+    {{/each}}
+  </div>
+
+  {{#if selected_name}}
+  <div class="details">
+    <div class="name">{{selected_name}}</div>
+    <button class="btn increase primary">Give 5 points <i class="icon-thumbs-up"></i></button>
+    <button type="button" class="btn decrease warning">Take some points <i class="icon-thumbs-down"></i></button>
+  </div>
+  {{/if}}
+
+  {{#unless selected_name}}
+  <div class="none">Click to play</div>
+  {{/unless}}
+</template>
+
+<template name="player">
+  <div class="player {{selected}}">
+    <span class="name">{{name}}</span>
+    <span class="score">{{score}}</span>
+  </div>
+</template>
+
+<template name="rules">
+ <div class="{{className}} contentBox">
+  <div class="arule">
+    <div class="brule">
+      <h3>Click someone on the leaderboard to add or remove votes</h3>
+      <h3>Figure out how to cheat with <a href="http://meteor.com">Meteor.js</a></h3>
+      <h3>Fork it on <a href="http://github.com/bradbarbin/leaderboard">GitHub</a></h3>
+    </div>
+    <div class="bottomRules" style="margin:0; width:100%; background:#F2F2F2; border-top:1px solid #CCC; text-align:center; padding:10px 0;">
+      <button class="btn">Hide the Rules</button>
+    </div>
+  </div>
+ </div>
+</template>
