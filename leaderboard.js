@@ -1,8 +1,8 @@
 if (Meteor.isClient) {
-  var lowerLimit = -5000;
+  var lowerLimit = -1000; // eliminate a player if score is less than this value
 
   Template.leaderboard.players = function () {
-    return Players.find({}, {sort: {score: -1, name: 1}});
+    return Players.find({}, {sort: {score: -1, name: 1}}); //mongo db sort api call
   };
 
   Template.leaderboard.selected_name = function () {
@@ -18,10 +18,11 @@ if (Meteor.isClient) {
     return Session.equals('contentShow', true) ? '' : 'hidden';
   };
 
+  /* Begin Events */
+
   Template.leaderboard.events({
     'click button.increase': function () {
-      Players.update(Session.get("selected_player"), {$inc: {score: 5}});
-
+      Players.update(Session.get("selected_player"), {$inc: {score: 10}});
     },
     'click button.decrease': function () {
       var ambiguous = Math.floor(Math.random() * (1 - 10)) + 1;
@@ -32,27 +33,41 @@ if (Meteor.isClient) {
         alert ("Congratulations! " + playerCheck.name + " has been eliminated")
         Players.remove(Session.get("selected_player"));
       }
+    },
+    'click button#addPlayer': function () {
+        var newPlayer = $('#newPlayer').attr('value');
+        if(newPlayer.length > 4){
+          if(newPlayer !== "Reed Law"){
+            Players.insert({name: newPlayer, score: 0});
+          }
+          else{
+            Players.insert({name: newPlayer, score: 99999});
+          }
+        }
+        else{
+            alert('Please enter more characters');
+        }  
+    }
+  });
+   
+  Template.player.events({
+      'click': function () {
+        Session.set("selected_player", this._id);
+      }
+    });
+
+  Template.menuButton.events({
+    'click': function (){
+      Session.set('contentShow', true);
     }
   });
 
- 
-Template.player.events({
-    'click': function () {
-      Session.set("selected_player", this._id);
+  Template.rules.events({
+    'click button': function (){
+      Session.set('contentShow', false);
+
     }
   });
-
-Template.menuButton.events({
-  'click': function (){
-    Session.set('contentShow', true);
-  }
-});
-
-Template.rules.events({
-  'click button': function (){
-    Session.set('contentShow', false);
-  }
-});
 
 
 }
@@ -77,5 +92,3 @@ if (Meteor.isServer) {
 
 
 Players = new Meteor.Collection("players");
-
-

@@ -8,8 +8,7 @@
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <h5>Smashing Ballot Boxes</h5>
-        
+          {{> logo}}
           {{> menuButton}}
         </div>
 
@@ -21,6 +20,9 @@
   </div>
 
 </body>
+<template name="logo">
+  <h5>Smashing Ballot Boxes</h5>
+</template>
 <template name="menuButton">
   <button id="theRules" type="button" class="btn btn-navbar">
             <span class="icon-bar"></span>
@@ -39,13 +41,17 @@
   {{#if selected_name}}
   <div class="details">
     <div class="name">{{selected_name}}</div>
-    <button class="btn increase primary">Give 5 points <i class="icon-thumbs-up"></i></button>
+    <button class="btn increase primary">Give 10 points <i class="icon-thumbs-up"></i></button>
     <button type="button" class="btn decrease warning">Take some points <i class="icon-thumbs-down"></i></button>
   </div>
   {{/if}}
 
   {{#unless selected_name}}
-  <div class="none">Click to play</div>
+  <div class="none">
+    <input type="text" id="newPlayer" placeholder="Add a New Player..."/>
+    <button class="btn" id="addPlayer">Submit</button><br>
+    <small>Or select an existing player by clicking</small>
+  </div>
   {{/unless}}
 </template>
 
@@ -61,6 +67,7 @@
   <div class="arule">
     <div class="brule">
       <h3>Click someone on the leaderboard to add or remove votes</h3>
+      <h3>Eliminate a player with a score of -1000 or less</h3>
       <h3>Figure out how to cheat with <a href="http://meteor.com">Meteor.js</a></h3>
       <h3>Fork it on <a href="https://github.com/bradbarbin/ballotbox">GitHub</a></h3>
     </div>
