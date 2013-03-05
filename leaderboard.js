@@ -1,5 +1,10 @@
 if (Meteor.isClient) {
-  var lowerLimit = -1000; // eliminate a player if score is less than this value
+  
+  var lowerLimit = 0; // eliminate a player if score is less than this value
+
+  Meteor.startup(function(){
+    Meteor.subscribe("entire-db")
+  })
 
   Template.leaderboard.players = function () {
     return Players.find({}, {sort: {score: -1, name: 1}}); //mongo db sort api call
@@ -22,11 +27,11 @@ if (Meteor.isClient) {
 
   Template.leaderboard.events({
     'click button.increase': function () {
-      Players.update(Session.get("selected_player"), {$inc: {score: 10}});
+      Players.update(Session.get("selected_player"), {$inc: {score: 1}});
     },
     'click button.decrease': function () {
-      var ambiguous = Math.floor(Math.random() * (1 - 10)) + 1;
-      Players.update(Session.get("selected_player"), {$inc: {score: ambiguous}});
+      //var ambiguous = Math.floor(Math.random() * (1 - 10)) + 1;
+      Players.update(Session.get("selected_player"), {$inc: {score: -1}});
       
       var playerCheck = Players.findOne(Session.get("selected_player"));
       if(playerCheck.score< lowerLimit){
@@ -74,14 +79,15 @@ if (Meteor.isClient) {
 
 // On server startup, create some players if the database is empty.
 if (Meteor.isServer) {
+
   Meteor.startup(function () {
+     Meteor.publish('entire-db', function(){
+    return Players.find();
+  });
     Session.set('contentShow', false);
     if (Players.find().count() === 0) {
-      var names = ["Front End",
-                   "Back End",
-                   "Biz Dev/Ops",
-                   "Marketing",
-                   "Minorities"
+      var names = ["Zero-Sum gambling game for buying stuff",
+                   "CMS with Rails"
                    ];
 
       for (var i = 0; i < names.length; i++)

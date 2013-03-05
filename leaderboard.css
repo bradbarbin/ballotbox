@@ -48,8 +48,8 @@ a, a:visited{color:rgb(255, 0, 92);}
 
 .player .name {
     display: inline-block;
-    width: 300px;
-    font-size: 1.75em;
+    width: 420px;
+    font-size: 1.1em;
     padding-left: 25px;
 }
 
@@ -699,4 +699,8 @@ button.btn.btn-mini,
 input[type="submit"].btn.btn-mini {
   *padding-top: 1px;
   *padding-bottom: 1px;
+}
+
+#newPlayer{
+  width:70%;
 }

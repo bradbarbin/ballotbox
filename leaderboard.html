@@ -1,5 +1,5 @@
 <head>
-  <title>King of The Week</title>
+  <title>Suggestion Box</title>
 
 </head>
 
@@ -21,7 +21,7 @@
 
 </body>
 <template name="logo">
-  <h5>Smashing Ballot Boxes</h5>
+  <h5>Smashing Suggestion Boxes</h5>
 </template>
 <template name="menuButton">
   <button id="theRules" type="button" class="btn btn-navbar">
@@ -41,16 +41,16 @@
   {{#if selected_name}}
   <div class="details">
     <div class="name">{{selected_name}}</div>
-    <button class="btn increase primary">Give 10 points <i class="icon-thumbs-up"></i></button>
-    <button type="button" class="btn decrease warning">Take some points <i class="icon-thumbs-down"></i></button>
+    <button class="btn increase primary">Like <i class="icon-thumbs-up"></i></button>
+    <button type="button" class="btn decrease warning">Dislike <i class="icon-thumbs-down"></i></button>
   </div>
   {{/if}}
 
   {{#unless selected_name}}
   <div class="none">
-    <input type="text" id="newPlayer" placeholder="Add a New Player..."/>
-    <button class="btn" id="addPlayer">Submit</button><br>
-    <small>Or select an existing player by clicking</small>
+    <input type="text" id="newPlayer" placeholder="Add a New Idea..."/>
+    <button class="btn" id="addPlayer">Add Idea<i class="icon-share"></i></button><br>
+    <small>Or vote on an existing idea by clicking</small>
   </div>
   {{/unless}}
 </template>
@@ -66,13 +66,12 @@
  <div class="{{className}} contentBox">
   <div class="arule">
     <div class="brule">
-      <h3>Click someone on the leaderboard to add or remove votes</h3>
-      <h3>Eliminate a player with a score of -1000 or less</h3>
-      <h3>Figure out how to cheat with <a href="http://meteor.com">Meteor.js</a></h3>
+      <h3>Click an idea the leaderboard to add or remove votes</h3>
+      <h3>Eliminate an idea with a score of less than 0 </h3>
       <h3>Fork it on <a href="https://github.com/bradbarbin/ballotbox">GitHub</a></h3>
     </div>
     <div class="bottomRules" style="margin:0; width:100%; background:#F2F2F2; border-top:1px solid #CCC; text-align:center; padding:10px 0;">
-      <button class="btn">Hide the Rules</button>
+      <button class="btn btn-primary">Hide the Rules</button>
     </div>
   </div>
  </div>
