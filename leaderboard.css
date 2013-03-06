@@ -80,7 +80,9 @@ a, a:visited{color:rgb(255, 0, 92);}
 }
 
 .details .name{
-    line-height: 2.4em;
+    font-size:.6em;
+    line-height: .8em;
+    padding-bottom:20px;
 }
 
 .none {
